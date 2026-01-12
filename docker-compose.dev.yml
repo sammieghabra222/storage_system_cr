@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bodega-cr-backend-dev
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=true
+      - ENVIRONMENT=development
+      - SECRET_KEY=dev-secret-key-not-for-production
+      - CORS_ORIGINS=["http://localhost:3000","http://127.0.0.1:3000"]
+    volumes:
+      - ./backend/app:/app/app:ro
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: deps
+    container_name: bodega-cr-frontend-dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+    depends_on:
+      - backend

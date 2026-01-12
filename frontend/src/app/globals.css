@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors;
+  }
+
+  .sidebar-link-active {
+    @apply bg-primary-50 text-primary-700;
+  }
+
+  .sidebar-link-inactive {
+    @apply text-gray-600 hover:bg-gray-100 hover:text-gray-900;
+  }
+
+  /* Mobile-optimized card layout */
+  .mobile-card-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4;
+  }
+
+  /* Stats grid - 2 cols on mobile, 4 on desktop */
+  .stats-grid {
+    @apply grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4;
+  }
+
+  /* Responsive header with action button */
+  .page-header {
+    @apply flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4;
+  }
+
+  /* Mobile-friendly filter bar */
+  .filter-bar {
+    @apply flex flex-col sm:flex-row gap-3 sm:gap-4;
+  }
+
+  /* Touch-friendly button spacing for mobile */
+  .action-buttons {
+    @apply flex flex-wrap gap-2 sm:gap-3;
+  }
+
+  /* Mobile card with touch-optimized padding */
+  .mobile-card {
+    @apply p-4 sm:p-6;
+  }
+
+  /* Truncate text with mobile-aware max width */
+  .truncate-mobile {
+    @apply truncate max-w-[150px] sm:max-w-[200px] md:max-w-none;
+  }
+
+  /* Hide on mobile, show on tablet+ */
+  .hide-mobile {
+    @apply hidden sm:block;
+  }
+
+  /* Show on mobile, hide on tablet+ */
+  .show-mobile {
+    @apply block sm:hidden;
+  }
+}
+
+@layer utilities {
+  /* Safe area insets for mobile devices with notches */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Touch target minimum size for accessibility */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Prevent text selection on touch */
+  .no-select {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Smooth momentum scrolling on iOS */
+  .scroll-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Full height accounting for mobile browser chrome */
+  .h-screen-safe {
+    height: 100dvh;
+  }
+
+  .min-h-screen-safe {
+    min-height: 100dvh;
+  }
+}
